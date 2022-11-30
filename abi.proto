@@ -8,6 +8,9 @@ message LoginRequest{
 message Token{
     string data= 1;
 }
+message NewChatMessage{
+    string message=1;
+}
 service ChatService{
     rpc Login(LoginRequest)returns(Token){}
     //  rpc SendMessage(NewChatMessage)returns(SendMessageResponse){}
