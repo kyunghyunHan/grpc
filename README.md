@@ -6,6 +6,10 @@
 
 ## protobuf
 
+## Redis
+
+- 빠른 데이터베이스
+
 ## tonic
 
 - grpc 프레임워크
