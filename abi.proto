@@ -11,8 +11,10 @@ message Token{
 message NewChatMessage{
     string message=1;
 }
+message GetMessagesRequest{}
+message ChatMessage{}
 service ChatService{
     rpc Login(LoginRequest)returns(Token){}
     //  rpc SendMessage(NewChatMessage)returns(SendMessageResponse){}
-    //  rpc GetMessages(GetMessagesRequest)returns(GetMessagesResponce){}
+     rpc GetMessages(GetMessagesRequest)returns(stream ChatMessage){}
 }
