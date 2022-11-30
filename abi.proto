@@ -1,0 +1,15 @@
+syntax= "proto3";
+
+package abi;
+message LoginRequest{
+    string username=1;
+    string password=2;
+}
+message Token{
+    string data= 1;
+}
+service ChatService{
+    rpc Login(LoginRequest)returns(Token){}
+    //  rpc SendMessage(NewChatMessage)returns(SendMessageResponse){}
+    //  rpc GetMessages(GetMessagesRequest)returns(GetMessagesResponce){}
+}
