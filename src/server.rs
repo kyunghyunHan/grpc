@@ -28,7 +28,7 @@ impl Chat for ChatService {
         &self,
         request: Request<NewChatMessage>,
     ) -> ChatResult<SendMessageResponse> {
-        let sender = "tyr";
+        let sender = get_username(request.extensions())?;
         let info = request.into_inner();
         info!("send_message:{info:?}");
         let msg = info.into_chat_message(sender);
