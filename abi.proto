@@ -20,7 +20,7 @@ message ChatMessage{
     string content=3;
     int64 timestamp=4;
 }
-service ChatService{
+service Chat{
     rpc Login(LoginRequest)returns(Token){}
      rpc SendMessage(NewChatMessage)returns(SendMessageResponse){}
      rpc GetMessages(GetMessagesRequest)returns(stream ChatMessage){}

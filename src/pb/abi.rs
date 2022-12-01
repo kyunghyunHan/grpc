@@ -31,14 +31,14 @@ pub struct ChatMessage {
     pub timestamp: i64,
 }
 #[doc = r" Generated client implementations."]
-pub mod chat_service_client {
+pub mod chat_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     #[derive(Debug, Clone)]
-    pub struct ChatServiceClient<T> {
+    pub struct ChatClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl ChatServiceClient<tonic::transport::Channel> {
+    impl ChatClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -49,7 +49,7 @@ pub mod chat_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> ChatServiceClient<T>
+    impl<T> ChatClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -60,10 +60,7 @@ pub mod chat_service_client {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> ChatServiceClient<InterceptedService<T, F>>
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> ChatClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -75,7 +72,7 @@ pub mod chat_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            ChatServiceClient::new(InterceptedService::new(inner, interceptor))
+            ChatClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -101,7 +98,7 @@ pub mod chat_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/abi.ChatService/Login");
+            let path = http::uri::PathAndQuery::from_static("/abi.Chat/Login");
             self.inner.unary(request.into_request(), path, codec).await
         }
         pub async fn send_message(
@@ -115,7 +112,7 @@ pub mod chat_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/abi.ChatService/SendMessage");
+            let path = http::uri::PathAndQuery::from_static("/abi.Chat/SendMessage");
             self.inner.unary(request.into_request(), path, codec).await
         }
         pub async fn get_messages(
@@ -130,7 +127,7 @@ pub mod chat_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/abi.ChatService/GetMessages");
+            let path = http::uri::PathAndQuery::from_static("/abi.Chat/GetMessages");
             self.inner
                 .server_streaming(request.into_request(), path, codec)
                 .await
@@ -138,12 +135,12 @@ pub mod chat_service_client {
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod chat_service_server {
+pub mod chat_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ChatServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ChatServer."]
     #[async_trait]
-    pub trait ChatService: Send + Sync + 'static {
+    pub trait Chat: Send + Sync + 'static {
         async fn login(
             &self,
             request: tonic::Request<super::LoginRequest>,
@@ -162,13 +159,13 @@ pub mod chat_service_server {
         ) -> Result<tonic::Response<Self::GetMessagesStream>, tonic::Status>;
     }
     #[derive(Debug)]
-    pub struct ChatServiceServer<T: ChatService> {
+    pub struct ChatServer<T: Chat> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: ChatService> ChatServiceServer<T> {
+    impl<T: Chat> ChatServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -185,9 +182,9 @@ pub mod chat_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChatServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for ChatServer<T>
     where
-        T: ChatService,
+        T: Chat,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -200,10 +197,10 @@ pub mod chat_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/abi.ChatService/Login" => {
+                "/abi.Chat/Login" => {
                     #[allow(non_camel_case_types)]
-                    struct LoginSvc<T: ChatService>(pub Arc<T>);
-                    impl<T: ChatService> tonic::server::UnaryService<super::LoginRequest> for LoginSvc<T> {
+                    struct LoginSvc<T: Chat>(pub Arc<T>);
+                    impl<T: Chat> tonic::server::UnaryService<super::LoginRequest> for LoginSvc<T> {
                         type Response = super::Token;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
@@ -231,10 +228,10 @@ pub mod chat_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/abi.ChatService/SendMessage" => {
+                "/abi.Chat/SendMessage" => {
                     #[allow(non_camel_case_types)]
-                    struct SendMessageSvc<T: ChatService>(pub Arc<T>);
-                    impl<T: ChatService> tonic::server::UnaryService<super::NewChatMessage> for SendMessageSvc<T> {
+                    struct SendMessageSvc<T: Chat>(pub Arc<T>);
+                    impl<T: Chat> tonic::server::UnaryService<super::NewChatMessage> for SendMessageSvc<T> {
                         type Response = super::SendMessageResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
@@ -262,11 +259,10 @@ pub mod chat_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/abi.ChatService/GetMessages" => {
+                "/abi.Chat/GetMessages" => {
                     #[allow(non_camel_case_types)]
-                    struct GetMessagesSvc<T: ChatService>(pub Arc<T>);
-                    impl<T: ChatService>
-                        tonic::server::ServerStreamingService<super::GetMessagesRequest>
+                    struct GetMessagesSvc<T: Chat>(pub Arc<T>);
+                    impl<T: Chat> tonic::server::ServerStreamingService<super::GetMessagesRequest>
                         for GetMessagesSvc<T>
                     {
                         type Response = super::ChatMessage;
@@ -309,7 +305,7 @@ pub mod chat_service_server {
             }
         }
     }
-    impl<T: ChatService> Clone for ChatServiceServer<T> {
+    impl<T: Chat> Clone for ChatServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -319,7 +315,7 @@ pub mod chat_service_server {
             }
         }
     }
-    impl<T: ChatService> Clone for _Inner<T> {
+    impl<T: Chat> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -329,7 +325,7 @@ pub mod chat_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: ChatService> tonic::transport::NamedService for ChatServiceServer<T> {
-        const NAME: &'static str = "abi.ChatService";
+    impl<T: Chat> tonic::transport::NamedService for ChatServer<T> {
+        const NAME: &'static str = "abi.Chat";
     }
 }
