@@ -1,25 +1,25 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct LoginRequest {
     #[prost(string, tag = "1")]
     pub username: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
     pub password: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct Token {
     #[prost(string, tag = "1")]
     pub data: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct NewChatMessage {
     #[prost(string, tag = "1")]
     pub message: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct GetMessagesRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct SendMessageResponse {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Hash, Eq, Clone, PartialEq, ::prost::Message)]
 pub struct ChatMessage {
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
