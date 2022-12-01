@@ -4,8 +4,12 @@ impl Token {
     pub fn new(data: impl Into<String>) -> Self {
         Self { data: data.into() }
     }
-    pub fn into_user_name(self) -> String {
-        self.data
+    pub fn into_user_name(&self) -> String {
+        self.data.clone()
+    }
+
+    pub fn is_valid(&self) -> bool {
+        self.data.len() > 0
     }
 }
 impl LoginRequest {

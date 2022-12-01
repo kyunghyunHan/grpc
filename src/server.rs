@@ -7,6 +7,7 @@ use tokio::sync::{broadcast, mpsc};
 use tokio_stream::wrappers::UnboundedReceiverStream;
 use tonic::codegen::http::StatusCode;
 use tonic::transport::Server;
+use tonic::Extensions;
 use tonic::{Request, Response, Status};
 use tracing::{info, warn};
 const MAX_MESSAGES: usize = 100;
@@ -91,4 +92,15 @@ fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
 
     req.extensions_mut().insert(token);
     Ok(req)
+}
+fn get_username(ext: &Extensions) -> Result<String, Status> {
+    let token = ext
+        .get::<Token>()
+        .ok_or(Status::unauthenticated("No token"))?;
+
+    if token.is_valid() {
+        Ok(token.into_user_name())
+    } else {
+        Err(Status::unauthenticated("Invalid token"))
+    }
 }
