@@ -1,10 +1,10 @@
 use anyhow::Result;
 use grpc_chat::client::Client;
 use std::env;
-use tokio::io;
-use tokio::io::AsyncBufReadExt;
+use tokio::io::{self, AsyncBufReadExt};
 #[tokio::main]
 async fn main() -> Result<()> {
+    tracing_subscriber::fmt::init();
     let username = env::var("USERNAME")?;
     let mut client = Client::new(username).await;
 
@@ -14,8 +14,7 @@ async fn main() -> Result<()> {
     let mut stdin = io::BufReader::new(io::stdin()).lines();
 
     while let Ok(Some(line)) = stdin.next_line().await {
-        let (room, content) = line.split_at(line.find(':').unwrap());
-        client.send_message("room", line).await?;
+        client.send_message("lobby", line).await?;
     }
     Ok(())
 }

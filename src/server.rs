@@ -5,7 +5,6 @@ use futures::prelude::*;
 use std::pin::Pin;
 use tokio::sync::{broadcast, mpsc};
 use tokio_stream::wrappers::UnboundedReceiverStream;
-use tonic::codegen::http::StatusCode;
 use tonic::transport::Server;
 use tonic::Extensions;
 use tonic::{Request, Response, Status};
