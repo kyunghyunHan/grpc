@@ -9,7 +9,8 @@ message Token{
     string data= 1;
 }
 message NewChatMessage{
-    string message=1;
+    string room =1;
+    string content=2;
 }
 message GetMessagesRequest{}
 message SendMessageResponse{}

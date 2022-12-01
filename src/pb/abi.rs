@@ -13,7 +13,9 @@ pub struct Token {
 #[derive(Hash, Eq, serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct NewChatMessage {
     #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
+    pub room: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub content: ::prost::alloc::string::String,
 }
 #[derive(Hash, Eq, serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetMessagesRequest {}
