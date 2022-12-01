@@ -4,6 +4,9 @@ impl Token {
     pub fn new(data: impl Into<String>) -> Self {
         Self { data: data.into() }
     }
+    pub fn into_user_name(self) -> String {
+        self.data
+    }
 }
 impl LoginRequest {
     pub fn new(username: impl Into<String>, password: impl Into<String>) -> Self {

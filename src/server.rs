@@ -1,12 +1,15 @@
+use crate::pb::chat_server::ChatServer;
 use crate::pb::*;
 use crate::pb::{chat_server::Chat, LoginRequest};
 use futures::prelude::*;
 use std::pin::Pin;
 use tokio::sync::{broadcast, mpsc};
 use tokio_stream::wrappers::UnboundedReceiverStream;
+use tonic::codegen::http::StatusCode;
+use tonic::transport::Server;
 use tonic::{Request, Response, Status};
-use tracing::info;
-use tracing::log::warn;
+use tracing::{info, warn};
+const MAX_MESSAGES: usize = 100;
 pub struct ChatService {
     tx: broadcast::Sender<ChatMessage>,
 }
@@ -43,6 +46,7 @@ impl Chat for ChatService {
         let (sender, receiver) = mpsc::unbounded_channel();
 
         tokio::spawn(async move {
+            //filter out message
             while let Ok(msg) = rx.recv().await {
                 if let Err(_) = sender.send(Ok(msg)) {
                     warn!("Failed to send.Sender might be closed");
@@ -54,4 +58,37 @@ impl Chat for ChatService {
 
         Ok(Response::new(Box::pin(stream)))
     }
+}
+impl Default for ChatService {
+    fn default() -> Self {
+        let (tx, _rx) = broadcast::channel(MAX_MESSAGES);
+        Self { tx }
+    }
+}
+pub async fn start() {
+    let svc = ChatServer::with_interceptor(ChatService::default(), check_auth);
+
+    let addr = "0.0.0.0:8000".parse().unwrap();
+
+    info!("Listening on http://{}", addr);
+    Server::builder()
+        .add_service(svc)
+        .serve(addr)
+        .await
+        .unwrap();
+}
+
+fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
+    let token = match req.metadata().get("authorization") {
+        Some(v) => {
+            let data = v
+                .to_str()
+                .map_err(|_| Status::new(tonic::Code::Unauthenticated, "Invalid token format"))?;
+            Token::new(data.strip_prefix("Bearer").unwrap())
+        }
+        None => Token::default(),
+    };
+
+    req.extensions_mut().insert(token);
+    Ok(req)
 }
