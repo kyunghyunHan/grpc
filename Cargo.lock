@@ -311,6 +311,7 @@ dependencies = [
  "prost",
  "serde",
  "tokio",
+ "tokio-stream",
  "tonic",
  "tonic-build",
  "tracing",
