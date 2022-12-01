@@ -51,3 +51,8 @@ impl ChatMessage {
         }
     }
 }
+impl GetMessagesRequest {
+    pub fn new() -> Self {
+        Self {}
+    }
+}
