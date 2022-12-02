@@ -101,7 +101,7 @@ impl Interceptor for AuthInterceptor {
             let value = AsciiMetadataValue::from_str(&format!("Bearer {}", token.data)).unwrap();
             req.metadata_mut().insert("authorization", value);
         }
- 
+
         Ok(req)
     }
 }
