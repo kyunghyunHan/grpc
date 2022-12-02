@@ -9,7 +9,7 @@ use tonic::{Extensions, Request, Response, Status};
 use tracing::{info, warn};
 
 const MAX_MESSAGES: usize = 1024;
-
+//채팅전파용
 pub struct ChatService {
     tx: broadcast::Sender<ChatMessage>,
 }
