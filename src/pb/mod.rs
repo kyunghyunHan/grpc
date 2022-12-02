@@ -7,7 +7,7 @@ impl Token {
         Self { data: data.into() }
     }
 
-    /// TODO: use jwt for decode token
+    /// TODO: 디코드 토큰에 jwt 사용
     pub fn into_username(&self) -> String {
         self.data.clone()
     }
@@ -24,7 +24,7 @@ impl LoginRequest {
         }
     }
 
-    /// TODO: use jwt token instead
+    // TODO: 대신 jwt 토큰 사용
     pub fn into_token(&self) -> Token {
         Token::new(&self.username)
     }
