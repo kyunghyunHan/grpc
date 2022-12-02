@@ -1,10 +1,14 @@
 mod abi;
+
 pub use abi::*;
+
 impl Token {
     pub fn new(data: impl Into<String>) -> Self {
         Self { data: data.into() }
     }
-    pub fn into_user_name(&self) -> String {
+
+    /// TODO: use jwt for decode token
+    pub fn into_username(&self) -> String {
         self.data.clone()
     }
 
@@ -19,11 +23,13 @@ impl LoginRequest {
             password: password.into(),
         }
     }
-    //jwt token instead
+
+    /// TODO: use jwt token instead
     pub fn into_token(&self) -> Token {
         Token::new(&self.username)
     }
 }
+
 impl NewChatMessage {
     pub fn new(room: impl Into<String>, content: impl Into<String>) -> Self {
         Self {
@@ -36,6 +42,7 @@ impl NewChatMessage {
         ChatMessage::new(sender, self.room, self.content)
     }
 }
+
 impl ChatMessage {
     pub fn new(
         sender: impl Into<String>,
@@ -51,6 +58,7 @@ impl ChatMessage {
         }
     }
 }
+
 impl GetMessagesRequest {
     pub fn new() -> Self {
         Self {}
