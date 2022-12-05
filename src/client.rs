@@ -45,7 +45,7 @@ impl Rooms {
 
 impl Client {
     pub async fn new(username: impl Into<String>) -> Self {
-        let channel = Channel::from_static("http://127.0.0.1:8080")
+        let channel = Channel::from_static("http://127.0.0.1:8000")
             .connect()
             .await
             .unwrap();

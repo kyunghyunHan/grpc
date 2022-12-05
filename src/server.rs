@@ -72,10 +72,10 @@ impl Default for ChatService {
         Self { tx }
     }
 }
-
+//서버 시작
 pub async fn start() {
     let svc = ChatServer::with_interceptor(ChatService::default(), check_auth);
-    let addr = "0.0.0.0:8080".parse().unwrap();
+    let addr = "0.0.0.0:8000".parse().unwrap();
     info!("listening on http://{}", addr);
     Server::builder()
         .add_service(svc)
@@ -83,7 +83,7 @@ pub async fn start() {
         .await
         .unwrap();
 }
-
+//주소 체크
 fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
     let token = match req.metadata().get("authorization") {
         Some(v) => {
@@ -97,14 +97,17 @@ fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
     req.extensions_mut().insert(token);
     Ok(req)
 }
-
+//유저 이름 가져오기
+//프로토콜 확장의 유형 맵.
 fn get_username(ext: &Extensions) -> Result<String, Status> {
     let token = ext
         .get::<Token>()
         .ok_or(Status::unauthenticated("No token"))?;
+    //유효성 검사
     if token.is_valid() {
         Ok(token.into_username())
     } else {
+        //요청에 작업에 대한 유효한 인증 자격 증명이 없을떄
         Err(Status::unauthenticated("Invalid token"))
     }
 }
