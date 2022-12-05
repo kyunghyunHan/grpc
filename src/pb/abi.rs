@@ -23,6 +23,8 @@ pub struct NewChatMessage {
     #[prost(string, tag = "1")]
     pub room: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
+    pub username: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
     pub content: ::prost::alloc::string::String,
 }
 /// 빈 전송 메시지 응답

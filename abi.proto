@@ -31,7 +31,8 @@ message Token {
 message NewChatMessage {
 
   string room = 1;
-  string content = 2;
+  string username=2;
+  string content = 3;
 }
 
 

@@ -31,9 +31,14 @@ impl LoginRequest {
 }
 
 impl NewChatMessage {
-    pub fn new(room: impl Into<String>, content: impl Into<String>) -> Self {
+    pub fn new(
+        room: impl Into<String>,
+        username: impl Into<String>,
+        content: impl Into<String>,
+    ) -> Self {
         Self {
             room: room.into(),
+            username: username.into(),
             content: content.into(),
         }
     }

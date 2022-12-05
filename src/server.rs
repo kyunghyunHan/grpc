@@ -97,7 +97,7 @@ fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
     req.extensions_mut().insert(token);
     Ok(req)
 }
-//유저 이름 가져오기
+
 //프로토콜 확장의 유형 맵.
 fn get_username(ext: &Extensions) -> Result<String, Status> {
     let token = ext

@@ -68,9 +68,10 @@ impl Client {
     pub async fn send_message(
         &mut self,
         room: impl Into<String>,
+        username: impl Into<String>,
         content: impl Into<String>,
     ) -> Result<()> {
-        let msg = NewChatMessage::new(room, content);
+        let msg = NewChatMessage::new(room, username, content);
         self.conn.send_message(msg).await?;
         Ok(())
     }
