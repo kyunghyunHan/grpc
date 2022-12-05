@@ -7,7 +7,8 @@ use tokio::io::{self, AsyncBufReadExt};
 #[tokio::main]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-
+    //username
+    //sender
     let username = "sk";
     // let username = env::var("USERNAME")?;
     println!("username{}", username);
