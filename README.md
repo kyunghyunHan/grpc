@@ -13,10 +13,25 @@
 
 ```proto
 syntax = "proto3";
+/*
+int32,int64:음수에 비효율적
+uint32,uint64
+sint32,sint64
+fixed32,fixed64
+sfixed32,sfixed64
+bool
+string
+bytes
 
+**위 값들의 default**
+numeric:0
+bool:false
+string:null
+byte:null
+*/
 message SearchRequest {
-  string query = 1;
-  int32 page_number = 2;
+  string query = 1;//문자형 필드
+  int32 page_number = 2;//정수형필드
   int32 result_per_page = 3;
 }
 ```
