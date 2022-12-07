@@ -2,8 +2,26 @@
 
 ## gRPC
 
+- 이미지 같은 서비스
+- 쿠버네티스
+- protobuf를 이용해 json보다 좋은 성능
+- 통신비용 절감
+- 내장기능 풍부(인증)
 - Google에서 develop 한 system이며 모든 환경에서 실행할수 있는 고성능 RPC프레임워크
 - 마이크로서비스
+- gprpc클라이언트와 서버
+- 채널은 사용자가 표면적으로 손쉽게 메세지를 보낼수있는 쉬운 인터페이스 제공
+- 채널은 하나의 엔드포인트에 대한 virtual connection을 repesent한다.
+- 클라이언트가 gRPC채널을 만들면 내부적으로 서버와 http2 conn
+- RPC 는 HTTP/2의 stream으로 처리
+- Message는 HTTP/2의 frame으로 처리
+- grpc클라이언트 resolver ,LB(로드밸런스)를 들고있음
+- 리졸브는 주기적으로 target DNS를 리졸브하면서 엔드포인터들을 통신
+- conn이 실패하면 LB는 직전에 사용했던 address list 를 사용해서 재연결 싲가
+
+- Keepalive
+- KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
+- 실제로 커넥션을 살리는 역활
 
 ## 구성
 
@@ -171,30 +189,13 @@ service Chat {
 - 서비스명과 RPC메소드명 모드 CamleCase형태권장
 - stream옵션을 주면 양방향 streamingRPC를 구현할수 있다.
 
-## 당근마켓
-
-- 이미지 같은 서비스
-- 쿠버네티스
-- protobuf를 이용해 json보다 좋은 성능
-- 통신비용 절감
-- 내장기능 풍부(인증)
-
-- gprpc클라이언트와 서버
-
-- 채널은 사용자가 표면적으로 손쉽게 메세지를 보낼수있는 쉬운 인터페이스 제공
-- 채널은 하나의 엔드포인트에 대한 virtual connection을 repesent한다.
-- 클라이언트가 gRPC채널을 만들면 내부적으로 서버와 http2 conn
-- RPC 는 HTTP/2의 stream으로 처리
-- Message는 HTTP/2의 frame으로 처리
-- grpc클라이언트 resolver ,LB(로드밸런스)를 들고있음
-- 리졸브는 주기적으로 target DNS를 리졸브하면서 엔드포인터들을 통신
-- conn이 실패하면 LB는 직전에 사용했던 address list 를 사용해서 재연결 싲가
-
-- Keepalive
-- KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
-- 실제로 커넥션을 살리는 역활
-
 ## 예시
 
 - 백서버는 golang
 - 각각의 서버는python
+
+## 설명
+
+- grpc
+- protobuf
+- grpc 하기
