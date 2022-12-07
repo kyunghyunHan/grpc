@@ -10,18 +10,6 @@
 - 내장기능 풍부(인증)
 - 마이크로서비스
 - gprpc클라이언트와 서버
-- 채널은 사용자가 표면적으로 손쉽게 메세지를 보낼수있는 쉬운 인터페이스 제공
-- 채널은 하나의 엔드포인트에 대한 virtual connection을 repesent한다.
-- 클라이언트가 gRPC채널을 만들면 내부적으로 서버와 http2 conn
-- RPC 는 HTTP/2의 stream으로 처리
-- Message는 HTTP/2의 frame으로 처리
-- grpc클라이언트 resolver ,LB(로드밸런스)를 들고있음
-- 리졸브는 주기적으로 target DNS를 리졸브하면서 엔드포인터들을 통신
-- conn이 실패하면 LB는 직전에 사용했던 address list 를 사용해서 재연결 싲가
-
-- Keepalive
-- KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
-- 실제로 커넥션을 살리는 역활
 
 ## 구성
 
@@ -55,6 +43,18 @@
 
 - 여러 서브 채널을 열어서 통신
 - 이 채널은 재사용함으로써 통신비용을 절약할수 있다.
+- 채널은 사용자가 표면적으로 손쉽게 메세지를 보낼수있는 쉬운 인터페이스 제공
+- 채널은 하나의 엔드포인트에 대한 virtual connection을 repesent한다.
+- 클라이언트가 gRPC채널을 만들면 내부적으로 서버와 http2 conn
+- RPC 는 HTTP/2의 stream으로 처리
+- Message는 HTTP/2의 frame으로 처리
+- grpc클라이언트 resolver ,LB(로드밸런스)를 들고있음
+- 리졸브는 주기적으로 target DNS를 리졸브하면서 엔드포인터들을 통신
+- conn이 실패하면 LB는 직전에 사용했던 address list 를 사용해서 재연결 싲가
+
+- Keepalive
+- KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
+- 실제로 커넥션을 살리는 역활
 
 ## 비교
 
