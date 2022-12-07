@@ -161,6 +161,12 @@ reserved 미리 예약
 
 ## 4.Service
 
+```proto
+service Chat {
+  rpc Login(LoginRequest) returns (Token) {}
+}
+```
+
 - Service는 RPC를 통해 서버가 클라이언트가 제공할 함수의 형태를 정의한다.
 - 서비스명과 RPC메소드명 모드 CamleCase형태권장
 - stream옵션을 주면 양방향 streamingRPC를 구현할수 있다.
