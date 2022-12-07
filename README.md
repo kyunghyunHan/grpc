@@ -175,3 +175,8 @@ reserved 미리 예약
 - Keepalive
 - KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
 - 실제로 커넥션을 살리는 역활
+
+## 예시
+
+- 백서버는 golang
+- 각각의 서버는python
