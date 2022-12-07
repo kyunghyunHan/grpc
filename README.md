@@ -5,6 +5,12 @@
 - Google에서 develop 한 system이며 모든 환경에서 실행할수 있는 고성능 RPC프레임워크
 - 마이크로서비스
 
+## 구성
+
+- protobuf
+- server
+- client
+
 ## 장점
 
 - 다양한 언어를 기반으로 만들수 있다.
