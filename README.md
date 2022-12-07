@@ -197,9 +197,29 @@ service Chat {
 
 ## 다른 메세지 유형사용
 
+```proto
+message Login{
+User data =1;
+}
+message User{
+  string id=1;
+  string name=2;
+}
+```
+
 - 다른 메세지 타입을 필드 타입으로 사용할수 있음
 
 ## 중첩타입
+
+```proto
+message User_Login{
+   message Login{
+    string id=1;
+    string password=2;
+   }
+   repeated Result results=1;
+}
+```
 
 - message타입을 중첩해서 사용가능
 
@@ -208,6 +228,16 @@ service Chat {
 - 필드 타입으로 Map을 사용할수 있다.
 
 ## Packege
+
+```proto
+syntax="proto3";
+
+package grpc.sample2;
+
+message ExampleRequest {
+  map<string, string> requests = 1;
+}
+```
 
 - proto buf 타입간 이름 충동을 피하기 위해 파일에 선택적으로 package지정자를 추가할수 있다.
 
