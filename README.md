@@ -179,6 +179,8 @@ reserved 미리 예약
 
 ## 4.Service
 
+- client에서 stub객체로 호추랄 프로시저를 정의
+
 ```proto
 service Chat {
   rpc Login(LoginRequest) returns (Token) {}
@@ -188,6 +190,26 @@ service Chat {
 - Service는 RPC를 통해 서버가 클라이언트가 제공할 함수의 형태를 정의한다.
 - 서비스명과 RPC메소드명 모드 CamleCase형태권장
 - stream옵션을 주면 양방향 streamingRPC를 구현할수 있다.
+
+## 열거형
+
+- 열거형은 반드시 시작을 0으로 해야한다.
+
+## 다른 메세지 유형사용
+
+- 다른 메세지 타입을 필드 타입으로 사용할수 있음
+
+## 중첩타입
+
+- message타입을 중첩해서 사용가능
+
+## Map type
+
+- 필드 타입으로 Map을 사용할수 있다.
+
+## Packege
+
+- proto buf 타입간 이름 충동을 피하기 위해 파일에 선택적으로 package지정자를 추가할수 있다.
 
 ## 예시
 
