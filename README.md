@@ -197,28 +197,37 @@ service Chat {
 - Service는 RPC를 통해 서버가 클라이언트가 제공할 함수의 형태를 정의한다.
 - 서비스명과 RPC메소드명 모드 CamleCase형태권장
 - stream옵션을 주면 양방향 streamingRPC를 구현할수 있다.
+
+```proto
+service User{
+  rpc Login(LoginRequest)rerurns(Token){}
+}
+```
+
 - 서버에 single request를 보내면 서버는 single response를 돌려준다
 
 ```proto
-
-```
-
-```proto
-
+service User{
+  rpc Login(LoginRequest)rerurns(stream Token){}
+}
 ```
 
 - Server stramong RPC서버에 single request를 보내면 서버는 stram을 돌려준다.Stream에는 message시퀸스가 들어있다.
 - 클라이언트는 더이상의 message가 없을떄 까지 stram을 읽어드린다.
 
 ```proto
-
+service User{
+rpc Login(stream LoginRequest)rerurns( Token){}
+}
 ```
 
 - 3.client streaming RPC클라이언트가 주어진 Stream을 이용하여 message sequence를 서버에 보낸다.
 - 클라이언트는 메세지들을 모두 작성하고 나면 서버가 읽고 response를 주기를 기다린다.
 
 ```proto
-
+service User{
+rpc Login(stream LoginRequest)rerurns( stream Token){}
+}
 ```
 
 - 4.양방향 streaming RPC Read-write stream을 사용하여 클라이언트와 서버 두측 모두 message sequence를 보낸다.
