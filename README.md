@@ -126,9 +126,7 @@ syntax="proto3";
 
 ## 1.메세지 타입
 
-```proto
-syntax = "proto3";
-/*
+```
 int32,int64:음수에 비효율적
 uint32,uint64
 sint32,sint64
@@ -143,7 +141,11 @@ numeric:0
 bool:false
 string:null
 byte:null
-*/
+```
+
+```proto
+syntax = "proto3";
+
 message SearchRequest {
   string query = 1;//문자형 필드
   int32 page_number = 2;//정수형필드
@@ -153,12 +155,12 @@ message SearchRequest {
 
 - message 는 세개의 필드를 정의
 
-## 2.
+## 2.message 필드
 
 ```proto
 message SearchRequest {
-required  string query = 1;//문자형 필드
-optional int32 page_number = 2;//정수형필드
+required  string query = 1;
+optional int32 page_number = 2;
 repeated  int32 result_per_page = 3;
 }
 /*
