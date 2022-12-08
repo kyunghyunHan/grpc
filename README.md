@@ -2,15 +2,16 @@
 
 ## RPC(Remote Procedure call)
 
-- 프로세스간 통신의 한형태
-- 분산되어 있는 컴퓨터간의 통신을 위한 기술
+- 프로세스간 통신의 한형태이며, 분산되어 있는 컴퓨터간의 통신을 위한 기술
 - 원격서버에서 함수/메소드 호출
 - HTTP API의 맥락에서 URL에 메서드를 넣고 쿼리 문자열이나 본문에 인수를 넣는 작업이 수반
+- RPC API는 REST접근 방식 대신 {"id":1}DELETE/rsource/1
+- RPC-XM 및 RPC-JSON으로 구현될수 있다.
 
 ## Stub
 
-- proto request,proto response
 - RPC의 핵심개념
+- proto request,proto response
 - 객체를 메세지로 변환 /역변환하는 레이어
 - 클라이언트의 스텁과 서버의 스텁으로 나뉨
 - 클라이언트의 스텁은 함수 호출에서 파라미터의 변환 및 함수 실행 후 서버에서 전달된 결과의 변환담당
