@@ -286,9 +286,10 @@ message ExampleRequest {
 - proto buf 타입간 이름 충동을 피하기 위해 파일에 선택적으로 package지정자를 추가할수 있다.
 
 ## 예시
+![msa](https://user-images.githubusercontent.com/88940298/206364272-8b4246d1-9515-4315-895a-15d4b6d67f76.png)
 
 - 백서버는 golang
-- 각각의 서버는python
+- 각각의 서버
 
 ## 설명
 
