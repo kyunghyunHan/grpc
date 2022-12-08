@@ -70,6 +70,8 @@
 
 ## 채널
 
+- gRPC는HTTP/2기반에 HTTP Sreaming을 사용하여 데이터를 보내며 HTTP/2의 경우 connection을 계속 유지하는 메커니즘이다.
+- gRPC는 보통 하나의 connection을 맺어놓고 아 connection을 채널 이라한다.
 - 여러 서브 채널을 열어서 통신
 - 이 채널은 재사용함으로써 통신비용을 절약할수 있다.
 - 채널은 사용자가 표면적으로 손쉽게 메세지를 보낼수있는 쉬운 인터페이스 제공
@@ -84,6 +86,10 @@
 - Keepalive
 - KeepAlive는 HTTP/2ping 프레임을 보내 연결 상태를 주기적으로 확인
 - 실제로 커넥션을 살리는 역활
+
+## Stream
+
+- 하나의 RPC call을 호출할 떄 이 호출을 Stream이라고 하며 RPC이 호출이 시작되면 Stream이 시작되었다가 종료되면 Stream이 닫힌다.
 
 ## 비교
 
@@ -191,6 +197,33 @@ service Chat {
 - Service는 RPC를 통해 서버가 클라이언트가 제공할 함수의 형태를 정의한다.
 - 서비스명과 RPC메소드명 모드 CamleCase형태권장
 - stream옵션을 주면 양방향 streamingRPC를 구현할수 있다.
+- 서버에 single request를 보내면 서버는 single response를 돌려준다
+
+```proto
+
+```
+
+```proto
+
+```
+
+- Server stramong RPC서버에 single request를 보내면 서버는 stram을 돌려준다.Stream에는 message시퀸스가 들어있다.
+- 클라이언트는 더이상의 message가 없을떄 까지 stram을 읽어드린다.
+
+```proto
+
+```
+
+- 3.client streaming RPC클라이언트가 주어진 Stream을 이용하여 message sequence를 서버에 보낸다.
+- 클라이언트는 메세지들을 모두 작성하고 나면 서버가 읽고 response를 주기를 기다린다.
+
+```proto
+
+```
+
+- 4.양방향 streaming RPC Read-write stream을 사용하여 클라이언트와 서버 두측 모두 message sequence를 보낸다.
+- 두 Stream은 모두 독립적으로 동작하여 클라이언트와 서버는 순서대로 읽어들일수 있다.
+- 예를 들어 서버는 클라이언트의 모든 메세지를 읽은뒤 response를 write할수도 있고 아니면 번갈아 가며 한 메세지씪 쓸수도 있다.
 
 ## 열거형
 
