@@ -97,6 +97,7 @@
 - REST:GRPC섞어서구성하거나 REST만사용
 
 ## 워크플로우
+![스크린샷 2022-12-08 오후 2 23 17](https://user-images.githubusercontent.com/88940298/206363535-67616cb1-cd01-4407-9ad7-1884e256dea5.png)
 
 - 1.protobufs definitions
 - 2.protoc complier
