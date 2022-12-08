@@ -286,7 +286,8 @@ message ExampleRequest {
 - proto buf 타입간 이름 충동을 피하기 위해 파일에 선택적으로 package지정자를 추가할수 있다.
 
 ## 예시
-![msa](https://user-images.githubusercontent.com/88940298/206364272-8b4246d1-9515-4315-895a-15d4b6d67f76.png)
+
+![스크린샷 2022-12-08 오후 2 30 19 1](https://user-images.githubusercontent.com/88940298/206364590-a45e5e1e-f936-4562-b2c2-77e5d7ba0e7c.png)
 
 - 백서버는 golang
 - 각각의 서버
