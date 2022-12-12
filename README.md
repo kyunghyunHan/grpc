@@ -17,7 +17,6 @@
 - Client Stub과 Server Stub의 스텁으로 나뉨
 - Client Stub은 함수 호출에서 파라미터의 변환 및 함수 실행 후 서버에서 전달된 결과의 변환담당
 - 서버의 스텁은 클라이언트가 전달한 매개 변수의 역변환 및 함수 실행결과를 담당
-- proto request,proto response
 
 ## 마이크로서비스
 
@@ -128,23 +127,6 @@ syntax="proto3";
 
 ## 1.메세지 타입
 
-```
-int32,int64:음수에 비효율적
-uint32,uint64
-sint32,sint64
-fixed32,fixed64
-sfixed32,sfixed64
-bool
-string
-bytes
-
-**위 값들의 default**
-numeric:0
-bool:false
-string:null
-byte:null
-```
-
 ```proto
 syntax = "proto3";
 
@@ -155,7 +137,22 @@ message SearchRequest {
 }
 ```
 
-- message 는 세개의 필드를 정의
+- int32,int64:양수 음수
+- uint32,uint64:부호없는 2바이트 정수
+- sint32,sint64:부호있는 2바이트 정수 일반 int32보다 효율적
+- fixed32,fixed64:항상4바이트보다 큰경우 uint32보다 더 효율적
+- sfixed32,sfixed64:항상 8바이트 보다 큰 경우 uint64 보다 효율적
+- bool
+- string
+- bytes
+
+```
+  **위 값들의 default**
+  numeric:0
+  bool:false
+  string:null
+  byte:null
+```
 
 ## 2.message 필드
 
@@ -241,6 +238,19 @@ rpc Login(stream LoginRequest)rerurns( stream Token){}
 - 예를 들어 서버는 클라이언트의 모든 메세지를 읽은뒤 response를 write할수도 있고 아니면 번갈아 가며 한 메세지씪 쓸수도 있다.
 
 ## 열거형
+
+```proto
+enum Corpus{
+  CORPUS_UNSPECIFIED = 0;
+  CORPUS_UNIVERSAL = 1;
+  CORPUS_WEB = 2;
+  CORPUS_IMAGES = 3;
+  CORPUS_LOCAL = 4;
+  CORPUS_NEWS = 5;
+  CORPUS_PRODUCTS = 6;
+  CORPUS_VIDEO = 7;
+}
+```
 
 - 열거형은 반드시 시작을 0으로 해야한다.
 
