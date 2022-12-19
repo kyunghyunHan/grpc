@@ -280,7 +280,21 @@ message User_Login{
 }
 ```
 
-- message타입을 중첩해서 사용가능
+- message타입을 중첩해서 사용가능하다.
+
+## oneof
+
+- 필드가 많은 메세지가 있고 최대 하나의 필드가 동시에 설정되는 경우 동작을 적용하고 메모리를 절약할수 있는 기능
+- oneof의 멤버를 설정하면 다른 모든 멤버가 자동으로 지워진다.
+
+```proto3
+message SampleMessage {
+  oneof test_oneof {
+    string name = 4;
+    SubMessage sub_message = 9;
+  }
+}
+```
 
 ## Map type
 
